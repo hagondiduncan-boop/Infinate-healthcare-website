@@ -60,6 +60,165 @@
         .thumb-preview:hover {
             transform: translateY(-2px);
         }
+
+        /* Programme Photo Slider */
+        .programme-photo-slider {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            height: 430px;
+            margin: 0 auto 48px;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #0f172a;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.15);
+        }
+
+        .programme-photo-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .programme-photo-slide {
+            min-width: 100%;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .programme-photo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .programme-photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.05) 55%);
+            pointer-events: none;
+        }
+
+        .programme-photo-caption {
+            position: absolute;
+            left: 28px;
+            bottom: 28px;
+            z-index: 2;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        }
+
+        .programme-photo-caption h3 {
+            margin: 0 0 5px;
+            font-size: 1.35rem;
+            font-weight: 800;
+        }
+
+        .programme-photo-caption p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        .programme-slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4;
+            width: 44px;
+            height: 44px;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.48);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .programme-slider-btn:hover {
+            background: rgba(0, 0, 0, 0.75);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .programme-slider-btn.prev {
+            left: 18px;
+        }
+
+        .programme-slider-btn.next {
+            right: 18px;
+        }
+
+        .programme-slider-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 18px;
+            transform: translateX(-50%);
+            z-index: 4;
+            display: flex;
+            gap: 8px;
+        }
+
+        .programme-slider-dot {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            border: 0;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.55);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .programme-slider-dot.active {
+            width: 28px;
+            background: white;
+        }
+
+        @media (max-width: 768px) {
+            .programme-photo-slider {
+                height: 320px;
+                margin-bottom: 36px;
+                border-radius: 18px;
+            }
+
+            .programme-photo-caption {
+                left: 18px;
+                bottom: 20px;
+            }
+
+            .programme-photo-caption h3 {
+                font-size: 1.05rem;
+            }
+
+            .programme-photo-caption p {
+                font-size: 0.78rem;
+            }
+
+            .programme-slider-btn {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .programme-photo-slider {
+                height: 260px;
+            }
+
+            .programme-slider-btn.prev {
+                left: 10px;
+            }
+
+            .programme-slider-btn.next {
+                right: 10px;
+            }
+        }
     </style>
 </head>
 <body class="bg-lightBg text-slate-800 flex flex-col min-h-screen">
@@ -567,7 +726,10 @@
 
                 <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
                     <h2 class="text-2xl font-bold text-primary mb-8 text-center">Conditions We Treat</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="bg-blue-50/50 p-6 rounded-xl border border-blue-100">
                             <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
                                 <i class="fa-solid fa-child text-2xl mr-3"></i> Paediatric Conditions
@@ -607,6 +769,68 @@
                 <div class="text-center mb-12">
                     <h1 class="text-3xl sm:text-4xl font-extrabold text-primary mb-4">Core Strategic Programmes</h1>
                     <p class="text-slate-600 max-w-2xl mx-auto">Discover our four key community initiatives designed for sustainable impact.</p>
+                </div>
+
+                <!-- Programme Photo Slider -->
+                <div class="programme-photo-slider" id="programme-photo-slider">
+                    <div class="programme-photo-track" id="programme-photo-track">
+                        <div class="programme-photo-slide">
+                            <img src="program-photo-1.jpg" alt="InfiniteCare therapy and recreational activity">
+                            <div class="programme-photo-overlay"></div>
+                            <div class="programme-photo-caption">
+                                <h3>Therapy & Recreational Activities</h3>
+                                <p>Supporting movement, participation and inclusion.</p>
+                            </div>
+                        </div>
+
+                        <div class="programme-photo-slide">
+                            <img src="program-photo-2.jpg" alt="InfiniteCare child support session">
+                            <div class="programme-photo-overlay"></div>
+                            <div class="programme-photo-caption">
+                                <h3>Child Support & Care</h3>
+                                <p>Creating supportive experiences for children and families.</p>
+                            </div>
+                        </div>
+
+                        <div class="programme-photo-slide">
+                            <img src="program-photo-3.jpg" alt="InfiniteCare therapy session">
+                            <div class="programme-photo-overlay"></div>
+                            <div class="programme-photo-caption">
+                                <h3>Therapy & Early Intervention</h3>
+                                <p>Individualised support to promote development and independence.</p>
+                            </div>
+                        </div>
+
+                        <div class="programme-photo-slide">
+                            <img src="program-photo-4.jpg" alt="InfiniteCare learning and therapy activity">
+                            <div class="programme-photo-overlay"></div>
+                            <div class="programme-photo-caption">
+                                <h3>Learning Through Play</h3>
+                                <p>Building confidence, skills and participation through activities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="programme-slider-btn prev"
+                            onclick="programmePrevSlide()" aria-label="Previous programme photo">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <button type="button" class="programme-slider-btn next"
+                            onclick="programmeNextSlide()" aria-label="Next programme photo">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <div class="programme-slider-dots" id="programme-slider-dots">
+                        <button type="button" class="programme-slider-dot active"
+                                onclick="programmeGoToSlide(0)" aria-label="Programme photo 1"></button>
+                        <button type="button" class="programme-slider-dot"
+                                onclick="programmeGoToSlide(1)" aria-label="Programme photo 2"></button>
+                        <button type="button" class="programme-slider-dot"
+                                onclick="programmeGoToSlide(2)" aria-label="Programme photo 3"></button>
+                        <button type="button" class="programme-slider-dot"
+                                onclick="programmeGoToSlide(3)" aria-label="Programme photo 4"></button>
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -1167,6 +1391,61 @@
             updateSlider();
             startSlideTimer();
         };
-    </script>
+    
+        // Programme photo slider
+        let programmeSlideIndex = 0;
+        let programmeSlideTimer = null;
+
+        function updateProgrammeSlider() {
+            const track = document.getElementById('programme-photo-track');
+            const dots = document.querySelectorAll('#programme-slider-dots .programme-slider-dot');
+
+            if (!track || !dots.length) return;
+
+            track.style.transform = `translateX(-${programmeSlideIndex * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === programmeSlideIndex);
+            });
+        }
+
+        function programmeGoToSlide(index) {
+            const totalSlides = document.querySelectorAll('.programme-photo-slide').length;
+            if (!totalSlides) return;
+
+            programmeSlideIndex = (index + totalSlides) % totalSlides;
+            updateProgrammeSlider();
+            programmeRestartSlider();
+        }
+
+        function programmeNextSlide() {
+            programmeGoToSlide(programmeSlideIndex + 1);
+        }
+
+        function programmePrevSlide() {
+            programmeGoToSlide(programmeSlideIndex - 1);
+        }
+
+        function programmeRestartSlider() {
+            if (programmeSlideTimer) clearInterval(programmeSlideTimer);
+
+            programmeSlideTimer = setInterval(() => {
+                programmeSlideIndex++;
+                const totalSlides = document.querySelectorAll('.programme-photo-slide').length;
+
+                if (programmeSlideIndex >= totalSlides) {
+                    programmeSlideIndex = 0;
+                }
+
+                updateProgrammeSlider();
+            }, 4000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateProgrammeSlider();
+            programmeRestartSlider();
+        });
+
+</script>
 </body>
 </html>
